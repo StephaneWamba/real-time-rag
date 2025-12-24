@@ -76,7 +76,6 @@ graph TB
 - **Multi-Collection Support**: Multiple vector collections
 - **Monitoring**: Prometheus metrics + Grafana dashboards
 - **Alerting**: Automated alerts for lag, errors, and downtime
-- **Performance Benchmarking**: Load testing tools
 - **Observability**: Prometheus metrics and Grafana dashboards for update lag, throughput, failures
 
 ## Tech Stack
@@ -195,7 +194,6 @@ real-time-rag/
 │   ├── update_service.py        # Update service (Kafka consumer + API)
 │   └── query_service.py          # Query service (RAG endpoint)
 ├── scripts/
-│   ├── benchmark.py               # Performance benchmarking
 │   ├── ingest_initial.py          # Initial data ingestion
 │   └── setup_debezium.ps1        # Debezium connector setup (PowerShell)
 ├── debezium/
@@ -393,8 +391,6 @@ docker compose restart update-service
 # Ingest initial documents
 docker compose exec update-service python scripts/ingest_initial.py
 
-# Run performance benchmark
-docker compose exec query-service python scripts/benchmark.py
 ```
 
 ## Troubleshooting

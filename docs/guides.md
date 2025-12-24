@@ -171,8 +171,6 @@ docker compose restart update-service
 # Ingest initial documents
 docker compose exec update-service python scripts/ingest_initial.py
 
-# Run performance benchmark
-docker compose exec query-service python scripts/benchmark.py
 ```
 
 ### Frontend UI
