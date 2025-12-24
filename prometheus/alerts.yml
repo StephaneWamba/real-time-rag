@@ -1,0 +1,49 @@
+groups:
+  - name: rag_alerts
+    interval: 30s
+    rules:
+      - alert: HighUpdateLag
+        expr: update_lag_seconds > 5
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Update lag is high"
+          description: "Update lag is {{ $value }}s, exceeding 5s threshold"
+
+      - alert: HighErrorRate
+        expr: rate(update_errors_total[5m]) > 0.1
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "High error rate in update service"
+          description: "Error rate is {{ $value }} errors/sec"
+
+      - alert: QueryServiceDown
+        expr: up{job="query-service"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Query service is down"
+          description: "Query service has been down for more than 1 minute"
+
+      - alert: UpdateServiceDown
+        expr: up{job="update-service"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Update service is down"
+          description: "Update service has been down for more than 1 minute"
+
+      - alert: HighQueryLatency
+        expr: query_latency_seconds > 10
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Query latency is high"
+          description: "Query latency is {{ $value }}s, exceeding 10s threshold"
+

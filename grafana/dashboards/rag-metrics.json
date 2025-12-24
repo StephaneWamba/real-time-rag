@@ -1,0 +1,77 @@
+{
+  "dashboard": {
+    "title": "Real-Time RAG Metrics",
+    "tags": ["rag", "monitoring"],
+    "timezone": "browser",
+    "panels": [
+      {
+        "id": 1,
+        "title": "Update Processing Duration",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "update_processing_duration_seconds",
+            "legendFormat": "Processing Time"
+          }
+        ],
+        "yaxes": [
+          {"format": "s", "label": "Duration (seconds)"}
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Update Lag",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "update_lag_seconds",
+            "legendFormat": "Lag"
+          }
+        ],
+        "yaxes": [
+          {"format": "s", "label": "Lag (seconds)"}
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Query Latency",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "query_latency_seconds",
+            "legendFormat": "Query Latency"
+          }
+        ],
+        "yaxes": [
+          {"format": "s", "label": "Latency (seconds)"}
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Total Updates",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "sum(rate(updates_total[5m]))",
+            "legendFormat": "Updates/sec"
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Error Rate",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(update_errors_total[5m])",
+            "legendFormat": "Errors/sec"
+          }
+        ]
+      }
+    ],
+    "refresh": "10s",
+    "schemaVersion": 16,
+    "version": 1
+  }
+}
+
